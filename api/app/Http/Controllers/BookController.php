@@ -3,43 +3,42 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BookPostRequest;
-use App\Models\Authors;
-use App\Models\Books;
+use App\Models\Author;
+use App\Models\Book;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-class BooksController extends Controller
+class BookController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Get all books.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return Books::all();
+        return Book::all();
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Create a new book.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(BookPostRequest $request)
+    public function create(BookPostRequest $request)
     {
-
         $fields = $request->validated();
 
-        $author = Authors::find($fields['author_id']);
+        $author = Author::findOrFail($fields['author_id']);
 
         if (!$author) {
 
             $response = [
-                'message' => 'This author does not exist'
+                'message' => 'This author does not exist',
             ];
 
-            return response($response, 404) ;
+            return response($response, 404);
         }
 
         $book = $author
@@ -48,20 +47,36 @@ class BooksController extends Controller
 
         $response = [
             'book' => $book,
-            'message' => 'a new book has been added'
+            'message' => 'a new book has been added',
         ];
 
         return response($response, 201);
-
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Books  $books
+     * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function show(Books $books)
+    public function show($id)
+    {
+        $book = Book::find($id);
+
+        $response = [
+            "book" => $book,
+        ];
+
+        return response($response, 200);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Book  $book
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Book $book)
     {
         //
     }
@@ -70,10 +85,10 @@ class BooksController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Books  $books
+     * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Books $books)
+    public function update(Request $request, Book $book)
     {
         //
     }
@@ -81,10 +96,10 @@ class BooksController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Books  $books
+     * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Books $books)
+    public function destroy(Book $book)
     {
         //
     }

@@ -3,34 +3,33 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AuthorPostRequest;
-use App\Models\Authors;
+use App\Models\Author;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-class AuthorsController extends Controller
+class AuthorController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Get all authors.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return Authors::all();
+        return Author::all();
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Create a new author.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AuthorPostRequest $request)
+    public function create(AuthorPostRequest $request)
     {
-
         $fields = $request->validated();
 
-        $author = Authors::create($fields);
+        $author = Author::create($fields);
 
         $response = [
             'author' => $author,
@@ -38,35 +37,45 @@ class AuthorsController extends Controller
         ];
 
         return response($response, 201);
-
     }
 
     /**
-     * Display the specified resource.
+     * Get all the author's books.
      *
-     * @param  \App\Models\Authors  $authors
+     * @param  \App\Models\Author  $author
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $author = Authors::find($id);
+
+        $author = Author::findOrFail($id);
 
         $response = [
-            'author' => $author->books()->get(),
+            "author's books" => $author->books()->get(),
         ];
 
         return response($response, 200);
+    }
 
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Author  $author
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Author $author)
+    {
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Authors  $authors
+     * @param  \App\Models\Author  $author
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Authors $authors)
+    public function update(Request $request, Author $author)
     {
         //
     }
@@ -74,10 +83,10 @@ class AuthorsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Authors  $authors
+     * @param  \App\Models\Author  $author
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Authors $authors)
+    public function destroy(Author $author)
     {
         //
     }

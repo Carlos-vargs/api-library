@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\AuthorsController;
-use App\Http\Controllers\BooksController;
+use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\BookController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,12 +15,18 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::get('/authors', [AuthorsController::class, 'index']);
+Route::get('/authors', [AuthorController::class, 'index']);
 
-Route::post('/authors', [AuthorsController::class, 'store']);
+Route::post('/authors', [AuthorController::class, 'create']);
 
-Route::get('/books', [BooksController::class, 'index']);
+Route::get('author/books/{id}', [AuthorController::class, 'show']);
 
-Route::post('/books', [BooksController::class, 'store']);
 
-Route::get('authors/{id}', [AuthorsController::class, 'show']);
+Route::get('/books', [BookController::class, 'index']);
+
+Route::post('/books', [BookController::class, 'create']);
+
+Route::get('book/{id}', [BookController::class, 'show']);
+
+
+

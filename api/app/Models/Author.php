@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Authors extends Model
+class Author extends Model
 {
     use HasFactory;
 
@@ -15,14 +15,14 @@ class Authors extends Model
         'nationality',
     ];
 
-    /**
-     * The books that belong to the Authors
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
+/**
+ * The books that belong to the Authors
+ *
+ * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+ */
     public function books()
     {
-        return $this->belongsToMany(Books::class, 'author_book', 'book_id', 'author_id')->withTimestamps();
+        return $this->belongsToMany(Book::class)->withTimestamps();
     }
-    
+
 }

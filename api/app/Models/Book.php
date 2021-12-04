@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Books extends Model
+class Book extends Model
 {
     use HasFactory;
 
@@ -15,9 +15,6 @@ class Books extends Model
      * @var string[]
      */
     protected $fillable = [
-        // 'author_first_name',
-        // 'author_last_name',
-        // 'author_nationality',
         'title',
         'category',
         'group',
@@ -34,7 +31,7 @@ class Books extends Model
      */
     public function authors()
     {
-        return $this->belongsToMany(Authors::class, 'author_book', 'book_id', 'author_id')->withTimestamps();
+        return $this->belongsToMany(Author::class)->withTimestamps();
     }
 
 }
