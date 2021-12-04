@@ -27,7 +27,7 @@ $php artisan key:generate
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=store
+DB_DATABASE=library
 DB_USERNAME=root
 DB_PASSWORD=
 
