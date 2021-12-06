@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AuthorPostRequest;
+use App\Http\Resources\AuthorResource;
 use App\Models\Author;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -16,7 +17,7 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        return Author::all();
+        return AuthorResource::collection(Author::paginate());
     }
 
     /**
@@ -50,8 +51,10 @@ class AuthorController extends Controller
 
         $author = Author::findOrFail($id);
 
+        $data = AuthorResource::make($author);
+
         $response = [
-            "author's books" => $author->books()->get(),
+            "data" => $data->books()->get(),
         ];
 
         return response($response, 200);

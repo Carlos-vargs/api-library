@@ -17,14 +17,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/authors', [AuthorController::class, 'index']);
 
-Route::post('/authors', [AuthorController::class, 'create']);
+Route::post('/author', [AuthorController::class, 'create']);
 
-Route::get('author/books/{id}', [AuthorController::class, 'show']);
+Route::get('author/{id}/books', [AuthorController::class, 'show']);
 
 
 Route::get('/books', [BookController::class, 'index']);
 
-Route::post('/books', [BookController::class, 'create']);
+Route::post('/book', [BookController::class, 'create']);
 
 Route::get('book/{id}', [BookController::class, 'show']);
 

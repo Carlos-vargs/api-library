@@ -7,6 +7,7 @@ use App\Models\Author;
 use App\Models\Book;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Http\Resources\BookResource;
 
 class BookController extends Controller
 {
@@ -17,7 +18,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        return Book::all();
+        return BookResource::collection(Book::paginate());
     }
 
     /**
@@ -63,11 +64,8 @@ class BookController extends Controller
     {
         $book = Book::find($id);
 
-        $response = [
-            "book" => $book,
-        ];
-
-        return response($response, 200);
+        return BookResource::make($book);
+        
     }
 
     /**
