@@ -24,13 +24,13 @@ class BookPostRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'author_first_name'=> 'required|string',
-            // 'author_last_name'=> 'required|string',
-            // 'author_nationality'=> 'required|string|max:3',
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
+            'nationality' => 'required|string|max:3',
             'title' => 'required|string',
             'category' => 'required|string',
             'group' => 'string',
-            'author_id' => 'required',
+            'author_id' => 'numeric',
             'language' => 'required|max:2',
             'year' => 'required|numeric',
             'description' => 'string',

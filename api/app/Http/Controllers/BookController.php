@@ -3,14 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BookPostRequest;
+use App\Http\Resources\BookResource;
 use App\Models\Author;
 use App\Models\Book;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use App\Http\Resources\BookResource;
 
 class BookController extends Controller
 {
+
     /**
      * Get all books.
      *
@@ -31,20 +32,44 @@ class BookController extends Controller
     {
         $fields = $request->validated();
 
-        $author = Author::findOrFail($fields['author_id']);
+        $author = Author::create([
+            'first_name' => $fields['first_name'],
+            'last_name' => $fields['last_name'],
+            'nationality' => $fields['nationality'],
+        ]);
 
-        if (!$author) {
+        $book = $author->books()->create([
+            'title' => $fields['title'],
+            'category' => $fields['category'],
+            'group' => $fields['group'],
+            'author_id' => $author->id,
+            'language' => $fields['language'],
+            'year' => $fields['year'],
+            'description' => $fields['description'],
+        ]);
+
+        if ($fields['author_id']) {
+
+            $author = Author::findOrFail($fields['author_id']);
+
+            $book = $author->books()->create([
+                'title' => $fields['title'],
+                'category' => $fields['category'],
+                'group' => $fields['group'],
+                'author_id' => $fields['author_id'],
+                'language' => $fields['language'],
+                'year' => $fields['year'],
+                'description' => $fields['description'],
+            ]);
 
             $response = [
-                'message' => 'This author does not exist',
+                'book' => $book,
+                'message' => 'a new book has been added',
             ];
+    
+            return response($response, 201);
 
-            return response($response, 404);
-        }
-
-        $book = $author
-            ->books()
-            ->create($fields);
+        };
 
         $response = [
             'book' => $book,
@@ -65,7 +90,7 @@ class BookController extends Controller
         $book = Book::find($id);
 
         return BookResource::make($book);
-        
+
     }
 
     /**
