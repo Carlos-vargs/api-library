@@ -42,34 +42,36 @@ class BookController extends Controller
             'title' => $fields['title'],
             'category' => $fields['category'],
             'group' => $fields['group'],
+            'cover_url' => $fields['cover_url'],
             'author_id' => $author->id,
             'language' => $fields['language'],
             'year' => $fields['year'],
             'description' => $fields['description'],
         ]);
 
-        if ($fields['author_id']) {
+        // if ($fields['author_id']) {
 
-            $author = Author::findOrFail($fields['author_id']);
+        //     $author = Author::findOrFail($fields['author_id']);
 
-            $book = $author->books()->create([
-                'title' => $fields['title'],
-                'category' => $fields['category'],
-                'group' => $fields['group'],
-                'author_id' => $fields['author_id'],
-                'language' => $fields['language'],
-                'year' => $fields['year'],
-                'description' => $fields['description'],
-            ]);
+        //     $book = $author->books()->create([
+        //         'title' => $fields['title'],
+        //         'category' => $fields['category'],
+        //         'group' => $fields['group'],
+        //         'author_id' => $fields['author_id'],
+        //         'cover_url' => $fields['cover_url'],
+        //         'language' => $fields['language'],
+        //         'year' => $fields['year'],
+        //         'description' => $fields['description'],
+        //     ]);
 
-            $response = [
-                'book' => $book,
-                'message' => 'a new book has been added',
-            ];
-    
-            return response($response, 201);
+        //     $response = [
+        //         'book' => $book,
+        //         'message' => 'a new book has been added',
+        //     ];
 
-        };
+        //     return response($response, 201);
+
+        // };
 
         $response = [
             'book' => $book,

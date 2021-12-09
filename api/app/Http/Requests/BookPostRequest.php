@@ -28,12 +28,13 @@ class BookPostRequest extends FormRequest
             'last_name' => 'required|string',
             'nationality' => 'required|string|max:3',
             'title' => 'required|string',
+            'cover_url' => 'required|string',
             'category' => 'required|string',
-            'group' => 'string',
-            'author_id' => 'numeric',
+            'group' => 'nullable|string',
+            'author_id' => 'numeric|nullable',
             'language' => 'required|max:2',
             'year' => 'required|numeric',
-            'description' => 'string',
+            'description' => 'nullable|string',
         ];
     }
 }

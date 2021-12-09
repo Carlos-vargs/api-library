@@ -17,11 +17,12 @@ class CreateBooksTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('category');
-            $table->string('group');
+            $table->string('group')->nullable();
+            $table->string('cover_url');
             $table->foreignId('author_id')->constrained();
             $table->string('language', 2)->default('en')->comment('ISO 693-1 alfa-2 language');
             $table->unsignedInteger('year')->default('1900');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

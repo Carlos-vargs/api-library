@@ -19,6 +19,7 @@ class Book extends Model
         'category',
         'group',
         'author_id',
+        'cover_url',
         'first_name',
         'last_name',
         'nationality',

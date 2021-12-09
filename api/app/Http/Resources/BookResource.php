@@ -24,6 +24,7 @@ class BookResource extends JsonResource
             'group' => $this->group,
             'year' => $this->year,
             'language' => $this->language,
+            'image' => $this->cover_url,
             'category' => $this->category,
             'description' => $this->description,
             'authors' => AuthorResource::make(Author::findOrFail($this->author_id)),
