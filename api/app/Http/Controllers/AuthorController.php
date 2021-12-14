@@ -30,8 +30,6 @@ class AuthorController extends Controller
     {
         $fields = $request->validated();
 
-        // $this->authorize('store', $fields['first_name']);
-
         $author = Author::create($fields);
 
         return AuthorResource::make($author);
