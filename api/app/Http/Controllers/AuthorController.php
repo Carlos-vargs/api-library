@@ -26,11 +26,15 @@ class AuthorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function create(AuthorPostRequest $request)
+    public function store(AuthorPostRequest $request)
     {
         $fields = $request->validated();
 
         $author = Author::create($fields);
+
+        // $authors = Author::where('first_name', '=', $fields['first_name']);
+        
+        // dd($authors);
 
         $response = [
             'author' => $author,
