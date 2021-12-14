@@ -2,27 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\BookResource;
-use Illuminate\Http\Request;
+use DB;
 use App\Models\Book;
-
+use Illuminate\Http\Response;
 
 class BookCategory extends Controller
 {
-    /**
-     * Filter books by category.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Request $request)
+    public function index()
     {
-        $params = $request->query();
 
-        $text = $params['filter'];
+        $categories = DB::table('books')->select('category')->get();
 
-        $result = Book::where('category', "=", $text)
-            ->get();
+        $response = [
+            'data' => $categories,
+        ];
 
-        return BookResource::collection($result);
+        return response($response, 200);
     }
 }

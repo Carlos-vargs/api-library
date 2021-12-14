@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Author;
 use Illuminate\Foundation\Http\FormRequest;
 
 class AuthorPostRequest extends FormRequest
@@ -13,7 +14,17 @@ class AuthorPostRequest extends FormRequest
      */
     public function authorize()
     {
+
+        $text = request()->first_name;
+
+        $authorExists = Author::where('first_name', $text)->exists();
+
+        if ($authorExists) {
+            return false;
+        }
+
         return true;
+
     }
 
     /**
@@ -38,5 +49,4 @@ class AuthorPostRequest extends FormRequest
             'nationality.required' => 'nationality is required',
         ];
     }
-
 }
