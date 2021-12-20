@@ -3,8 +3,7 @@
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\SearchBookController;
-use App\Http\Controllers\BookFilterByCategory;
-use App\Http\Controllers\BookCategory;
+use App\Http\Controllers\BookCategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,11 +25,9 @@ Route::get('/books', [BookController::class, 'index']);
 
 Route::post('/books', [BookController::class, 'store']);
 
-Route::get('/books/category', [BookFilterByCategory::class, 'index']);
+Route::get('/books/categories', [BookCategoryController::class, 'index']);
 
 Route::get('/search', [SearchBookController::class, 'index']);
-
-Route::get('/category', [BookCategory::class, 'index']);
 
 
 

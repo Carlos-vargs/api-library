@@ -6,7 +6,7 @@ use DB;
 use App\Models\Book;
 use Illuminate\Http\Response;
 
-class BookCategory extends Controller
+class BookCategoryController extends Controller
 {
     public function index()
     {
