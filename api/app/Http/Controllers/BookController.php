@@ -6,9 +6,6 @@ use App\Http\Requests\BookPostRequest;
 use App\Http\Resources\BookResource;
 use App\Models\Book;
 use App\Models\Author;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-
 class BookController extends Controller
 {
 

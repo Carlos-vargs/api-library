@@ -15,9 +15,7 @@ class SearchBookController extends Controller
      */
     public function index(Request $request)
     {
-        $params = $request->query();
-
-        $text = $params['filter'];
+        $text = $request->filter;
 
         $result = Book::where('category', 'like', '%' . $text . '%')
             ->orWhere('title', 'like', '%' . $text . '%')
